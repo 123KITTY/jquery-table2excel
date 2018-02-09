@@ -96,7 +96,7 @@
                     });
 
                     tempRows += "</tr>";
-                    console.log(tempRows);
+                    //console.log(tempRows);
                     
                 });
                 // exclude img tags
@@ -138,26 +138,37 @@
 
             fullTemplate= e.template.head;
 
-            if ( $.isArray(table) ) {
-                for (i in table) {
-                      //fullTemplate += e.template.sheet.head + "{worksheet" + i + "}" + e.template.sheet.tail;
+            if ($.isArray(table)) {
+                for (var i = 0; i < table.length; i++) {
                       fullTemplate += e.template.sheet.head + sheetName + i + e.template.sheet.tail;
                 }
+                //for (i in table) {
+                //      //fullTemplate += e.template.sheet.head + "{worksheet" + i + "}" + e.template.sheet.tail;
+                //      fullTemplate += e.template.sheet.head + sheetName + i + e.template.sheet.tail;
+                //}
             }
 
             fullTemplate += e.template.mid;
 
             if ( $.isArray(table) ) {
-                for (i in table) {
+                for (var i = 0; i < table.length; i++) {
                     fullTemplate += e.template.table.head + "{table" + i + "}" + e.template.table.tail;
                 }
+                //for (i in table) {
+                //    fullTemplate += e.template.table.head + "{table" + i + "}" + e.template.table.tail;
+                //}
             }
 
             fullTemplate += e.template.foot;
 
-            for (i in table) {
+            //for (i in table) {
+            //    e.ctx["table" + i] = table[i];
+            //}
+
+            for (var i = 0; i < table.length; i++) {
                 e.ctx["table" + i] = table[i];
             }
+
             delete e.ctx.table;
 
             var isIE = /*@cc_on!@*/false || !!document.documentMode; // this works with IE10 and IE11 both :)            
